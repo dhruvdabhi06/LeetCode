@@ -1,13 +1,8 @@
 class Solution {
 public:
     bool isBoomerang(vector<vector<int>>& points) {
-        int ans = 0;
-        for(int i=0;i<3;i++){
-            ans += points[i][0] * (points[ (i+1) % 3][1] - points[ (i+2) %3][1]);
-        }
-        if(ans == 0){
-            return false;
-        }
-        return true;
+        double area = abs((points[0][0] * (points[1][1] - points[2][1])) + (points[1][0] * (points[2][1] - points[0][1])) + (points[2][0] * (points[0][1] - points[1][1])))/(double)2;
+        
+        return area;
     }
 };
