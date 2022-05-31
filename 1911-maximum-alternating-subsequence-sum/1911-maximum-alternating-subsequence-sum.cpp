@@ -2,14 +2,18 @@ class Solution {
 public:
     long long maxAlternatingSum(vector<int>& nums) {
         int n = nums.size();
-        if(n == 1) return nums[0];
-        long long prevmaxodd = nums[0];
-        long long prevmaxeven = 0;;
-        for(int i=0;i<n;i++){
-            long long int temp = prevmaxodd;
-            prevmaxodd = max(prevmaxodd,nums[i]+prevmaxeven);
-            prevmaxeven = max(prevmaxeven,temp-nums[i]);
+        long long dp[2][n]; memset(&dp, 0x00, sizeof(dp));
+        //0 => even length, 1 => odd length
+        
+        dp[0][0] = 0;
+        dp[1][0] = nums[0];
+        
+        for(int i = 1; i < n; i++)
+        {
+            dp[0][i] = max(dp[0][i - 1], dp[1][i - 1] - nums[i]);
+            dp[1][i] = max(dp[1][i - 1], dp[0][i - 1] + nums[i]);
         }
-        return prevmaxodd;
+        
+        return max(dp[0][n - 1], dp[1][n - 1]);
     }
 };
