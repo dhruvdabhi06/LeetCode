@@ -1,13 +1,10 @@
 class Solution {
 public:
     int getSum(int a, int b) {
-        for(int i=0;i<b;i++){
-           a++;
-        }
-        if(b < 0){
-            for(int i = 0; i <abs(b) ; i++){
-                a--;
-            }
+        while(b!=0){
+            unsigned carry = a & b; 
+            a = a ^ b ;
+            b = carry << 1;
         }
         return a;
     }
