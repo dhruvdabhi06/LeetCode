@@ -10,10 +10,11 @@ class Solution:
         seen = set()
         while q:
             c = q.popleft()
-            if c == destination:
-                return True
+            
             if c in seen:
                 continue
+            if c == destination:
+                return True
             seen.add(c)
             for i in G[c]:
                 q.append(i)
